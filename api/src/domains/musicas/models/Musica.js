@@ -1,4 +1,3 @@
-// Ex: listaDeMusicas[0].nome retorna o nome da primeira música
 const listaDeMusicas = [
     {
   nome: 'Dark Necessities',
@@ -31,3 +30,5 @@ const listaDeMusicas = [
   quantidadeDownloads: 18000,
 }
 ]
+
+module.exports = listaDeMusicas;
