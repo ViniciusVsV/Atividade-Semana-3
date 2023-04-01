@@ -7,6 +7,6 @@ app.use(express.urlencoded({
 }));
 
 const musicaRouter = require("../src/domains/musicas/controllers/index");
-app.use("api/musica", musicaRouter);
+app.use("/api/musica", musicaRouter);
 
 module.exports = app;

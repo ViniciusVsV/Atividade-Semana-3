@@ -1,5 +1,5 @@
 const listaDeMusicas = [
-    {
+{
   nome: 'Dark Necessities',
   artista: 'Red Hot Chili Peppers',
   genero: 'Rock',
