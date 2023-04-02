@@ -23,6 +23,14 @@ router.post("/adicionar", (req, res) => {
     const musica = MusicaServices.Adicionar(req.body)
 
     res.status(200).json(musica);
+    console.log(Musica);
 });
+
+router.put("/atualizar", (req, res) => {
+    const musica = MusicaServices.Atualizar(req.body)
+
+    res.status(200).json(musica);
+    console.log(Musica);
+})
 
 module.exports = router;

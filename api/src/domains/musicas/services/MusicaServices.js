@@ -19,6 +19,12 @@ class MusicaServices {
 
         return musica;
     }
+
+    Atualizar(body){
+        const musica = this.Pesquisar(body.nome);
+        
+        musica.quantidadeDownloads = body.quantidadeDownloads;
+    }
 }
 
 module.exports = new MusicaServices();
