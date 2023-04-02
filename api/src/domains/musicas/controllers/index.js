@@ -10,7 +10,6 @@ router.get("/listarTodas", (req, res) => {
 
 //Filtra a lista de músicas por um nome passado
 router.get("/pesquisar", (req, res) => {
-    console.log("OI");
     const resultado =  MusicaServices.Pesquisar(req.query.nome);
 
     if (!resultado)
@@ -20,15 +19,10 @@ router.get("/pesquisar", (req, res) => {
 });
 
 //Adiciona uma música à lista
-router.post("/:nome/:artista/:genero/:downloads", (req, res) => {
-    const musica = {
-        nome: req.params.nome,
-        artista: req.params.artista,
-        genero: req.params.genero,
-        quantidadeDownloads: req.params.downloads
-    }
+router.post("/adicionar", (req, res) => {
+    const musica = MusicaServices.Adicionar(req.body)
 
-    listaDeMusicas.push(musica);
+    res.status(200).json(musica);
 });
 
 module.exports = router;

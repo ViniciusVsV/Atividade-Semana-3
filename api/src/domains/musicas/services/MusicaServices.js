@@ -6,6 +6,19 @@ class MusicaServices {
 
         return filtro;
     }
+
+    Adicionar(body) {
+        const musica = {
+            nome: body.nome, 
+            artista: body.artista,
+            genero: body.genero,
+            quantidadeDownloads: body.quantidadeDownloads
+        }
+    
+        Musica.push(musica);
+
+        return musica;
+    }
 }
 
 module.exports = new MusicaServices();
