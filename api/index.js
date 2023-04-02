@@ -1,2 +1,4 @@
 const app = require("./config/ExpressConfig");
-app.listen(3030, console.log("Servidor Rodando..."));
+
+const port = process.env.PORT;
+app.listen(port, console.log("Servidor Rodando..."));
