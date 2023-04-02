@@ -26,16 +26,25 @@ class MusicaServices {
 
     Atualizar(body){
         const musica = this.Pesquisar(body.nome);
+        const index = listaDeMusicas.indexOf(musica);
 
         if(musica == false)
                 return false;
             else
-                musica.quantidadeDownloads = body.quantidadeDownloads;
+                listaDeMusicas.at(index).quantidadeDownloads = body.quantidadeDownloads;
                 return musica;
     }
 
-    Remover(){
+    Remover(body){      //
+        const musica = this.Pesquisar(body.nome);
+        const index = listaDeMusicas.indexOf(musica);
 
+        if(musica == false)
+                return false;
+            else
+                listaDeMusicas.splice(index);
+                return musica;
+                
     }
 }
 

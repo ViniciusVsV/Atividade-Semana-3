@@ -35,8 +35,17 @@ router.put("/atualizar", (req, res) => {
         else
             res.status(200).json(musica);
             console.log(Musica);
-})
+});
 
-router.delete
+//Remove uma música da lista
+router.delete("/remover", (req, res) => {
+    const musica = MusicaServices.Remover(req.body);
+
+    if(musica == false)
+            res.status(404).send("Música não encontrada");
+        else
+            res.status(200).json(musica);
+            console.log(Musica);
+});
 
 module.exports = router;
