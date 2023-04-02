@@ -1,9 +1,8 @@
 const listaDeMusicas = require("../models/Musica");
-const Musica = require("../models/Musica");
 
 class MusicaServices {
     Pesquisar(nome) {
-        const filtro = Musica.filter(Musica => Musica.nome === nome);
+        const filtro = listaDeMusicas.filter(Musica => Musica.nome === nome);
 
         if(!filtro)
                 return false;
@@ -19,7 +18,7 @@ class MusicaServices {
             quantidadeDownloads: body.quantidadeDownloads
         }
     
-        Musica.push(musica);
+        listaDeMusicas.push(musica);
 
         return musica;
     }
@@ -42,7 +41,7 @@ class MusicaServices {
         if(musica == false)
                 return false;
             else
-                listaDeMusicas.splice(index);
+                listaDeMusicas.splice(index, 1);
                 return musica;
                 
     }

@@ -26,7 +26,7 @@ router.post("/adicionar", (req, res) => {
     console.log(Musica);
 });
 
-//Atualiza a contagem de downloads de uma música
+//Edita a contagem de downloads de uma música
 router.put("/atualizar", (req, res) => {
     const musica = MusicaServices.Atualizar(req.body)
 
