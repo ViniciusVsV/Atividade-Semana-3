@@ -28,7 +28,7 @@ router.post("/:nome/:artista/:genero/:downloads", (req, res) => {
         quantidadeDownloads: req.params.downloads
     }
 
-    listaDeMusicas.push(musica);
+    Musica.push(musica);
 });
 
 module.exports = router;
