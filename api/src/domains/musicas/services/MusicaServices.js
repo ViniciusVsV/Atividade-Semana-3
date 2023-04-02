@@ -1,10 +1,14 @@
+const listaDeMusicas = require("../models/Musica");
 const Musica = require("../models/Musica");
 
 class MusicaServices {
     Pesquisar(nome) {
         const filtro = Musica.filter(Musica => Musica.nome === nome);
 
-        return filtro;
+        if(!filtro)
+                return false;
+            else
+                return filtro;
     }
 
     Adicionar(body) {
@@ -22,8 +26,16 @@ class MusicaServices {
 
     Atualizar(body){
         const musica = this.Pesquisar(body.nome);
-        
-        musica.quantidadeDownloads = body.quantidadeDownloads;
+
+        if(musica == false)
+                return false;
+            else
+                musica.quantidadeDownloads = body.quantidadeDownloads;
+                return musica;
+    }
+
+    Remover(){
+
     }
 }
 

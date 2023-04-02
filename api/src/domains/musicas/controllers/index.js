@@ -12,7 +12,7 @@ router.get("/listarTodas", (req, res) => {
 router.get("/pesquisar", (req, res) => {
     const resultado =  MusicaServices.Pesquisar(req.query.nome);
 
-    if (!resultado)
+    if (resultado == false)
             res.status(404).json("Nenhuma música encontrada");
         else
             res.status(200).json(resultado);
@@ -26,11 +26,17 @@ router.post("/adicionar", (req, res) => {
     console.log(Musica);
 });
 
+//Atualiza a contagem de downloads de uma música
 router.put("/atualizar", (req, res) => {
     const musica = MusicaServices.Atualizar(req.body)
 
-    res.status(200).json(musica);
-    console.log(Musica);
+    if(musica == false)
+            res.status(404).send("Música não encontrada");
+        else
+            res.status(200).json(musica);
+            console.log(Musica);
 })
+
+router.delete
 
 module.exports = router;
