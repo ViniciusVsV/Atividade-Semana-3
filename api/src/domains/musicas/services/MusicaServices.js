@@ -2,7 +2,7 @@ const listaDeMusicas = require("../models/Musica");
 
 class MusicaServices {
     Pesquisar(nome) {
-        const filtro = listaDeMusicas.filter(Musica => Musica.nome === nome);
+        const filtro = listaDeMusicas.find(Musica => Musica.nome === nome);
 
         if(!filtro)
                 return false;
@@ -34,7 +34,7 @@ class MusicaServices {
                 return musica;
     }
 
-    Remover(body){      //
+    Remover(body){
         const musica = this.Pesquisar(body.nome);
         const index = listaDeMusicas.indexOf(musica);
 
