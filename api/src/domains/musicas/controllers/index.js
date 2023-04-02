@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const Musica = require("../models/Musica");
-const listaDeMusicas = require("../models/Musica");
+
 
 router.get("/Musicas", (req, res) => {
-    res.status(200).send(listaDeMusicas);
+    res.status(200).send(Musica);
 });
 
 router.get("/Musicas/Pesquisa", (req, res) => {
