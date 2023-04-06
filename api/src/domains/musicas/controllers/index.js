@@ -14,7 +14,7 @@ router.get("/pesquisar", (req, res) => {
     try {
         
         res.status(200).json(resultado);
-    } catch (error) {valeu
+    } catch (error) {
         res.status(404).json(error);
     }
 });
