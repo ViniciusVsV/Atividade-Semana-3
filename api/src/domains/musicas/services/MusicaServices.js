@@ -24,7 +24,7 @@ class MusicaServices {
     Atualizar(body){
         const musica = this.Pesquisar(body.nome);
     
-        if(musica == false)
+        if(!musica)
                 return false;
             else
                 musica.quantidadeDownloads = body.quantidadeDownloads;
@@ -35,12 +35,11 @@ class MusicaServices {
         const musica = this.Pesquisar(body.nome);
         const index = Musica.indexOf(musica);
 
-        try {
-            Musica.splice(index, 1);
-            return musica;
-        } catch (error) {
-            next(error);
-        }
+        if(!musica)
+                throw new Error("Música não encontrada")
+            else
+                Musica.splice(index, 1);
+                return musica;
     }
 }
 
