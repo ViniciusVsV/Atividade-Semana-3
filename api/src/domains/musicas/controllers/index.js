@@ -10,10 +10,11 @@ router.get("/listarTodas", (req, res) => {
 
 //Filtra a lista de músicas por um nome passado
 router.get("/pesquisar", (req, res) => {
+    const resultado =  MusicaServices.Pesquisar(req.query.nome);
     try {
-        const resultado =  MusicaServices.Pesquisar(req.query.nome);
+        
         res.status(200).json(resultado);
-    } catch (error) {
+    } catch (error) {valeu
         res.status(404).json(error);
     }
 });
