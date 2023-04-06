@@ -12,10 +12,11 @@ router.get("/listarTodas", (req, res) => {
 router.get("/pesquisar", (req, res) => {
     const resultado =  MusicaServices.Pesquisar(req.query.nome);
 
-    if (resultado == false)
-            res.status(404).json("Nenhuma música encontrada");
-        else
-            res.status(200).json(resultado);
+    try {
+        res.status(200).json(resultado);
+    } catch (error) {
+        res.status(404).json(error);
+    }
 });
 
 //Adiciona uma música à lista
@@ -41,11 +42,12 @@ router.put("/atualizar", (req, res) => {
 router.delete("/remover", (req, res) => {
     const musica = MusicaServices.Remover(req.body);
 
-    if(musica == false)
-            res.status(404).send("Música não encontrada");
-        else
-            res.status(200).json(musica);
-            console.log(Musica);
+    try {
+        res.status(200).json(musica);
+        console.log(Musica);
+    } catch (error) {
+        res.status(404).send(error);
+    }
 });
 
 module.exports = router;

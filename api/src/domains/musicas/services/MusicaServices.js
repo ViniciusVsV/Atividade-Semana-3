@@ -5,9 +5,8 @@ class MusicaServices {
         const filtro = Musica.find(Musica => Musica.nome === nome);
 
         if(!filtro)
-                return false;
-            else
-                return filtro;
+            throw new Error("Música não encontrada");
+        return filtro;
     }
 
     Adicionar(body) {
@@ -17,9 +16,8 @@ class MusicaServices {
             genero: body.genero,
             quantidadeDownloads: body.quantidadeDownloads
         }
-    
-        Musica.push(musica);
 
+        Musica.push(musica);
         return musica;
     }
 
@@ -37,12 +35,12 @@ class MusicaServices {
         const musica = this.Pesquisar(body.nome);
         const index = Musica.indexOf(musica);
 
-        if(musica == false)
-                return false;
-            else
-                Musica.splice(index, 1);
-                return musica;
-                
+        try {
+            Musica.splice(index, 1);
+            return musica;
+        } catch (error) {
+            next(error);
+        }
     }
 }
 
