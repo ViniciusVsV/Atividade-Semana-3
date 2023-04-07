@@ -24,11 +24,11 @@ class MusicaServices {
     Atualizar(body){
         const musica = this.Pesquisar(body.nome);
     
-        if(!musica)
-                return false;
-            else
-                musica.quantidadeDownloads = body.quantidadeDownloads;
-                return musica;
+        if (!musica)
+            throw new Error("Música não encontrada");
+        else
+            musica.quantidadeDownloads = body.quantidadeDownloads;
+            return musica;
     }
 
     Remover(body){
@@ -36,7 +36,7 @@ class MusicaServices {
         const index = Musica.indexOf(musica);
 
         if(!musica)
-                throw new Error("Música não encontrada")
+                throw new Error("Música não encontrada");
             else
                 Musica.splice(index, 1);
                 return musica;
