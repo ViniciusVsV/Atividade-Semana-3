@@ -7,16 +7,20 @@ const Musica = sequelize.define('Musica', {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
-    allowNull: false,
+    allowNull: false
   },
   foto:{
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   },
   titulo:{
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   },
+  categoria:{
+    type: DataTypes.STRING,
+    allowNull: false
+  }
 });
 
 Musica.belongsTo(Artista, {

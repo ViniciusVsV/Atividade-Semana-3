@@ -7,7 +7,7 @@ app.use(express.urlencoded({
 }));
 
 const musicaRouter = require("../src/domains/Musicas/controllers/index");
-app.use("/api/musica", musicaRouter);
+app.use("/api/musicas", musicaRouter);
 
 const usuariosRouter = require("../src/domains/usuarios/controllers/index");
 app.use("/api/usuarios", usuariosRouter);
