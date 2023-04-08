@@ -2,21 +2,21 @@ const sequelize = require("../../../../database/index");
 const {DataTypes} = require("sequelize");
 
 const Artista = sequelize.define("Artista", {
-    ID:{
+    id:{
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
     },
-    Nome:{
+    nome:{
         type: DataTypes.STRING,
         allowNull: false
     },
-    Nacionalidade:{
+    nacionalidade:{
         type: DataTypes.STRING,
         allowNull: false
     },
-    Foto:{
+    foto:{
         type: DataTypes.STRING,
         allowNull: false
     }
