@@ -1,34 +1,26 @@
-const listaDeMusicas = [
-{
-  nome: 'Dark Necessities',
-  artista: 'Red Hot Chili Peppers',
-  genero: 'Rock',
-  quantidadeDownloads: 15000,
-},
-{
-  nome: 'Boate Azul',
-  artista: 'Bruno & Marrone',
-  genero: 'Sertanejo',
-  quantidadeDownloads: 1000,
-},
-{
-  nome: 'Power',
-  artista: 'Kanye West',
-  genero: 'Hip Hop',
-  quantidadeDownloads: 12000,
-},
-{
-  nome: 'Money',
-  artista: 'Pink Floyd',
-  genero: 'Rock',
-  quantidadeDownloads: 140500,
-},
-{
-  nome: 'Enemy',
-  artista: 'Imagine Dragons x J.I.D',
-  genero: 'Pop Rock',
-  quantidadeDownloads: 18000,
-}
-]
+const sequelize = require('../../../../database/index');
+const {DataTypes} = require('sequelize');
 
-module.exports = listaDeMusicas;
+const Musica = sequelize.define('Musica', {
+  id:{
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false,
+  },
+  foto:{
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  titulo:{
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+});
+
+Musica.belongsTo(Artista, {
+  constraint: true, //chave estrangeira
+  foreignKey: 'idArtista',
+});
+
+module.exports = Musica;
