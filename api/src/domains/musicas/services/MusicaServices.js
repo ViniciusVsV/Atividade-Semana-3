@@ -10,7 +10,16 @@ class MusicaServices{
         if(!musica)
             throw new Error("Música não encontrada");
         else{
-            musica.destroy();
+            await musica.destroy();
+        }
+    }
+
+    async listarTodas(){
+        const musicas = await Musica.findAll();
+        if(!musicas)
+            throw new Error("Não há músicas");
+        else{
+            return musicas;
         }
     }
 };

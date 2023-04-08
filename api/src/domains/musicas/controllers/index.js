@@ -14,15 +14,25 @@ router.post('/create', async(req, res) =>{
     }
 });
 
+//Lista todas as músicas no banco de dados
+router.get("/listAll", async(req, res) => {
+    try {
+        const musicas = await MusicaServices.listarTodas();
+        res.status(200).json(musicas);
+    } catch(error) {
+        res.status(404).send(error);
+    }
+})
+
 //Remove uma música do banco de dados pelo id
 router.delete("/delete", async(req, res) => {
     const id = req.body.id;
     try{
         await MusicaServices.remover(id);
         res.status(200).json("Música removida");
-    }catch(error) {
+    }catch(error){
         res.status(404).send(error);
     }
-})
+});
 
 module.exports = router;
