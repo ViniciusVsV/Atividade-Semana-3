@@ -22,6 +22,23 @@ class MusicaServices{
             return musicas;
         }
     }
+
+    async atualizar(body){
+        const musica = Musica.findByPk(body.id);
+        if(!musica)
+            throw new Error("Música não encontrada");
+        else{
+            musica = await Musica.update(
+                {
+                    foto: body.foto,
+                    titulo: body.titulo
+                },
+                {
+                    where: {id: body.id}
+                }
+            );
+        }
+    }
 };
 
 module.exports = new MusicaServices();

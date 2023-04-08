@@ -22,6 +22,17 @@ router.get("/listAll", async(req, res) => {
     } catch(error) {
         res.status(404).send(error);
     }
+});
+
+//Atualiza as informações de uma música no banco de dados
+router.put("/update", async(req, res) => {
+    const body = req.body;
+    try {
+        await MusicaServices.atualizar(body);
+        res.status(200).json("Música atualizada");
+    } catch(error) {
+        res.status(404).send(error);
+    }
 })
 
 //Remove uma música do banco de dados pelo id
