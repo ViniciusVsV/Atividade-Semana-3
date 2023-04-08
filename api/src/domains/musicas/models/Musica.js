@@ -17,6 +17,10 @@ const Musica = sequelize.define('Musica', {
     type: DataTypes.STRING,
     allowNull: false
   },
+  categoria:{
+    type: DataTypes.STRING,
+    allowNull: false
+  }
 });
 
 Musica.belongsTo(Artista, {
