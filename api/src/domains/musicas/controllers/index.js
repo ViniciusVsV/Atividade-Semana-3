@@ -24,6 +24,17 @@ router.get("/listAll", async(req, res) => {
     }
 });
 
+//Filtra o banco de dados pelo título passado
+router.get("/listTitle", async(req, res) => {
+    const titulo = req.body.titulo;
+    try{
+        const musicas = await MusicaServices.filtrarTitulo(titulo);
+        res.status(200).json(musicas);
+    } catch(error) {
+        res.status(404).send(error);
+    }
+});
+
 //Atualiza as informações de uma música no banco de dados
 router.put("/update", async(req, res) => {
     const body = req.body;
@@ -33,7 +44,7 @@ router.put("/update", async(req, res) => {
     } catch(error) {
         res.status(404).send(error);
     }
-})
+});
 
 //Remove uma música do banco de dados pelo id
 router.delete("/delete", async(req, res) => {
