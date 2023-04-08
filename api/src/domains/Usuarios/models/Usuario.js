@@ -19,7 +19,10 @@ const Usuario = sequelize.define('Usuario', {
     senha:{
         type: DataTypes.STRING,
         allowNull: false,
-    }
+    },
+    cargo:{
+        type: DataTypes.STRING,
+    },
 });
 
 Usuario.sync({alter: false, force: false})
