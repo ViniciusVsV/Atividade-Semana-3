@@ -1,5 +1,6 @@
 const sequelize = require('../../../../database/index');
 const {DataTypes} = require('sequelize');
+const Artista =  require('../../artistas/models/Artista');
 
 const Musica = sequelize.define('Musica', {
   id:{
@@ -25,7 +26,7 @@ Musica.belongsTo(Artista, {
 
 Musica.sync({alter: false, force: false})
     .then(() => {
-        console.log('Tabela de Musicas foi re(criada)');
+        console.log('Tabela de Musicas foi (re)criada');
     })
     .catch((err) => console.log(err));
 
