@@ -22,7 +22,7 @@ const Artista = sequelize.define("Artista", {
     }
 });
 
-Artista.sync({alter: true, force: false})
+Artista.sync({alter: false, force: false})
     .then(() => {
         console.log("Tabela de Artistas foi (re)criada");
     })
