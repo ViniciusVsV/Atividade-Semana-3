@@ -23,12 +23,16 @@ const Musica = sequelize.define('Musica', {
   }
 });
 
+Artista.hasMany(Musica, {
+  foreignKey: 'idArtista'
+});
+
 Musica.belongsTo(Artista, {
   constraint: true, //chave estrangeira
   foreignKey: 'idArtista',
 });
 
-Musica.sync({alter: false, force: false})
+Musica.sync({alter: true, force: true})
     .then(() => {
         console.log('Tabela de Musicas foi (re)criada');
     })
