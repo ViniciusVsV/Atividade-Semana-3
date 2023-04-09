@@ -14,6 +14,24 @@ class ArtistaService{
             return musicas;
         }
     }
+
+    async atualizar(body){
+        const artista = Artista.findByPk(body.id);
+        if(!artista)
+            throw new Error("Artista não encontrado");
+        else{
+            artista = await Artista.update(
+                {
+                    nome: body.nome,
+                    nacionalidade: body.nacionalidade,
+                    foto: body.foto
+                },
+                {
+                    where: {id: body.id}
+                }
+            );
+        }
+    }
 };
 
 module.exports = new ArtistaService();
