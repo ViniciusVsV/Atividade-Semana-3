@@ -5,12 +5,12 @@ class ArtistaService{
         await Artista.create(body);
     }
 
-    async listarArtista(body){
-        const artista = await Artista.findOne({where: {nome : body.nome}});
+    async listarArtista(_nome){
+        const artista = await Artista.findOne({where: {nome : _nome}});
         if(!artista)
             throw new Error("Artista não existe");
         else{
-            const musicas = artista.findAll({where: {idArtista: artista.id}});
+            const musicas = artista.getMusicas();
             return musicas;
         }
     }
