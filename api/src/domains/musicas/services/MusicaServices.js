@@ -1,8 +1,13 @@
 const Musica = require("../models/Musica");
+const Artista = require("../../Artistas/models/Artista");
 
 class MusicaServices{
-    async criacao(body){
-        await Musica.create(body);
+    async criar(body){
+        const artista = Artista.findByPk(body.id);
+        if(!artista){
+            throw new Error("Artista não existente");
+        }else
+            await Musica.create(body);
     }
 
     async listarTodas(){

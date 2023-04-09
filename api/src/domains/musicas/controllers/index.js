@@ -4,28 +4,28 @@ const Musica = require("../models/Musica");
 const MusicaServices = require("../services/MusicaServices");
 
 //Adiciona uma música ao banco de dados
-router.post('/create', async(req, res) =>{
+router.post('/criar', async(req, res) =>{
     const body = req.body;
     try{
-        await MusicaServices.criacao(body);
+        await MusicaServices.criar(body);
         res.status(201).json('Música criada com sucesso!');
-    }catch{
-        res.status(400);
+    }catch(erro){
+        res.status(400).send(erro);
     }
 });
 
 //Lista todas as músicas no banco de dados
-router.get("/listAll", async(req, res) => {
+router.get("/listarTodas", async(req, res) => {
     try {
         const musicas = await MusicaServices.listarTodas();
         res.status(200).json(musicas);
-    } catch(error) {
-        res.status(404).send(error);
+    } catch(erro) {
+        res.status(404).send(erro);
     }
 });
 
 //Filtra o banco de dados pelo título passado
-router.get("/listTitle", async(req, res) => {
+router.get("/listarTitulo", async(req, res) => {
     const titulo = req.body.titulo;
     try{
         const musicas = await MusicaServices.filtrarTitulo(titulo);
@@ -36,24 +36,24 @@ router.get("/listTitle", async(req, res) => {
 });
 
 //Atualiza as informações de uma música no banco de dados
-router.put("/update", async(req, res) => {
+router.put("/atualizar", async(req, res) => {
     const body = req.body;
     try {
         await MusicaServices.atualizar(body);
         res.status(200).json("Música atualizada");
-    } catch(error) {
-        res.status(404).send(error);
+    } catch(erro) {
+        res.status(404).send(erro);
     }
 });
 
 //Remove uma música do banco de dados pelo id
-router.delete("/delete", async(req, res) => {
+router.delete("/remover", async(req, res) => {
     const id = req.body.id;
     try{
         await MusicaServices.remover(id);
         res.status(200).json("Música removida");
-    }catch(error){
-        res.status(404).send(error);
+    }catch(erro){
+        res.status(404).send(erro);
     }
 });
 

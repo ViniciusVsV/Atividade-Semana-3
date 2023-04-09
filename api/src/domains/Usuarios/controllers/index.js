@@ -3,7 +3,7 @@ const Usuario = require('../models/Usuario');
 const UsuarioService = require('../services/UsuarioServices');
 
 //Adiciona um usuário ao banco de dados
-router.post('/create', async(req, res) =>{
+router.post('/criar', async(req, res) =>{
     const body = req.body;
     try{
         await UsuarioService.criar(body);
@@ -14,7 +14,7 @@ router.post('/create', async(req, res) =>{
 });
 
 //Atualiza as informações de um usuário no banco de dados
-router.put("/update", async(req, res) => {
+router.put("/atualizar", async(req, res) => {
     const body = req.body;
     try {
         await UsuarioService.atualizar(body);
@@ -24,7 +24,7 @@ router.put("/update", async(req, res) => {
     }
 });
 
-router.delete("/delete", async(req, res) => {
+router.delete("/remover", async(req, res) => {
     const id = req.body.id;
     try{
         await UsuarioService.remover(id);

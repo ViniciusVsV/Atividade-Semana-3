@@ -1,7 +1,7 @@
 const Artista = require('../models/Artista');
 
 class ArtistaService{
-    async criacao(body){
+    async criar(body){
         await Artista.create(body);
     }
 };
