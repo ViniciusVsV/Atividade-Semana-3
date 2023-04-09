@@ -24,12 +24,14 @@ const Musica = sequelize.define('Musica', {
 });
 
 Artista.hasMany(Musica, {
-  foreignKey: 'idArtista'
+  foreignKey: "artistaId",
+  onDelete: "CASCADE"
 });
 
 Musica.belongsTo(Artista, {
-  constraint: true, 
-  foreignKey: 'idArtista',
+  constraint: true,
+  foreignKey: "artistaId",
+  onDelete: "CASCADE"
 });
 
 Musica.sync({alter: false, force: false})

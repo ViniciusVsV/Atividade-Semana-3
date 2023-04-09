@@ -6,7 +6,7 @@ class ArtistaService{
     }
 
     async listarArtista(body){
-        const artista = Artista.findOne({where: {nome : body.nome}});
+        const artista = await Artista.findOne({where: {nome : body.nome}});
         if(!artista)
             throw new Error("Artista não existe");
         else{
@@ -16,7 +16,7 @@ class ArtistaService{
     }
 
     async atualizar(body){
-        const artista = await Artista.findByPk(body.id); //nao está funcionando -> retorna 404 not found, mas atualiza so valores do mesmo jeito
+        const artista = await Artista.findByPk(body.id); //nao está funcionando -> retorna 404 not found, mas atualiza os valores do mesmo jeito
         if(!artista)
             throw new Error("Artista não encontrado");
         else{

@@ -35,7 +35,7 @@ router.put("/atualizar", async(req, res) => {
     }
 });
 
-//Remove um artista do banco de dados
+//Remove um artista do banco de dados e todas as músicas dele
 router.delete("/remover", async(req, res) => {
     const id = req.body.id;
     try{
