@@ -32,7 +32,7 @@ Musica.belongsTo(Artista, {
   foreignKey: 'idArtista',
 });
 
-Musica.sync({alter: true, force: true})
+Musica.sync({alter: false, force: false})
     .then(() => {
         console.log('Tabela de Musicas foi (re)criada');
     })

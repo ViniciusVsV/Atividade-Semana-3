@@ -1,7 +1,7 @@
 const Usuario = require('../models/Usuario');
 
 class UsuarioService{
-    async criacao(body){
+    async criar(body){
         await Usuario.create(body);
     }
 
@@ -21,6 +21,15 @@ class UsuarioService{
                     where: {id: body.id}
                 }
             );
+        }
+    }
+
+    async remover(id){
+        const usuario = await Usuario.findByPk(id);
+        if(!usuario)
+            throw new Error("Usuário não encontrado");
+        else{
+            await usuario.destroy();
         }
     }
 };

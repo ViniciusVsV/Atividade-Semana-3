@@ -6,7 +6,7 @@ const UsuarioService = require('../services/UsuarioServices');
 router.post('/create', async(req, res) =>{
     const body = req.body;
     try{
-        await UsuarioService.criacao(body);
+        await UsuarioService.criar(body);
         return res.status(201).json('Usuario criado com sucesso!');
     }catch{
         return res.status(400);
@@ -23,5 +23,15 @@ router.put("/update", async(req, res) => {
         res.status(404).send(error);
     }
 });
+
+router.delete("/delete", async(req, res) => {
+    const id = req.body.id;
+    try{
+        await UsuarioService.remover(id);
+        res.status(200).json("Usuário excluído");
+    } catch(error) {
+        res.status(400).send(error);
+    }
+}); 
 
 module.exports = router;
