@@ -1,4 +1,4 @@
-const Artista = require("../../Artistas/models/Artista");
+const Artista = require("../models/Artista");
 
 class ArtistaService{
     async criar(body){
@@ -16,7 +16,7 @@ class ArtistaService{
     }
 
     async atualizar(body){
-        const artista = Artista.findByPk(body.id);
+        const artista = await Artista.findByPk(body.id); //nao está funcionando -> retorna 404 not found, mas atualiza so valores do mesmo jeito
         if(!artista)
             throw new Error("Artista não encontrado");
         else{

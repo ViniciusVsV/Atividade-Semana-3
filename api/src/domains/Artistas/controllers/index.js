@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const Artista = require('../models/Artista');
 const ArtistaServices = require('../services/ArtistaServices');
 
 
@@ -19,8 +18,8 @@ router.get("/listarArtista", async(req, res) => {
     const body = req.body;
     try {
         const musicas = await ArtistaServices.listarArtista(body);
-        res.status(200).send(musicas);
-    } catch(erro){
+        res.status(200).json(musicas);
+    }catch(erro){
         res.status(404).send(erro);
     }
 });
@@ -28,10 +27,10 @@ router.get("/listarArtista", async(req, res) => {
 //Atualiza as informações de um artista no banco de dados
 router.put("/atualizar", async(req, res) => {
     const body = req.body;
-    try {
+    try{
         await ArtistaServices.atualizar(body);
-        res.status(200).json("Artista atualizada");
-    } catch(erro) {
+        res.status(200).json("Artista atualizado");
+    }catch(erro){
         res.status(404).send(erro);
     }
 });
@@ -41,8 +40,8 @@ router.delete("/remover", async(req, res) => {
     const id = req.body.id;
     try{
         await ArtistaServices.remover(id);
-        res.status(200).send("Artista removido");
-    } catch(erro){
+        res.status(200).json("Artista removido");
+    }catch(erro){
         res.status(404).send(erro);
     }
 })

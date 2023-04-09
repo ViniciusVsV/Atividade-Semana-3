@@ -9,10 +9,10 @@ app.use(express.urlencoded({
 const musicaRouter = require("../src/domains/Musicas/controllers/index");
 app.use("/api/musicas", musicaRouter);
 
-const usuariosRouter = require("../src/domains/usuarios/controllers/index");
+const usuariosRouter = require("../src/domains/Usuarios/controllers/index");
 app.use("/api/usuarios", usuariosRouter);
 
-const artistasRouter = require("../src/domains/artistas/controllers/index");
+const artistasRouter = require("../src/domains/Artistas/controllers/index");
 app.use("/api/artistas", artistasRouter);
 
 module.exports = app;

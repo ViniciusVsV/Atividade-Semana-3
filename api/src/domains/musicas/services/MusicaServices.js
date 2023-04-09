@@ -29,7 +29,7 @@ class MusicaServices{
     }
 
     async atualizar(body){
-        const musica = Musica.findByPk(body.id);
+        const musica = await Musica.findByPk(body.id);
         if(!musica)
             throw new Error("Música não encontrada");
         else{
