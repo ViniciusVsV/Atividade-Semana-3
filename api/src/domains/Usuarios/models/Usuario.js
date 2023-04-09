@@ -21,9 +21,9 @@ const Usuario = sequelize.define('Usuario', {
         allowNull: false,
     },
     cargo:{
-        type: DataTypes.STRING,
+        type: DataTypes.STRING, //adicionar "restricao" para cargo
     },
-});
+}); 
 
 Usuario.sync({alter: false, force: false})
     .then(() => {

@@ -28,7 +28,7 @@ Artista.hasMany(Musica, {
 });
 
 Musica.belongsTo(Artista, {
-  constraint: true, //chave estrangeira
+  constraint: true, 
   foreignKey: 'idArtista',
 });
 
