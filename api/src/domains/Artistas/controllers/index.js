@@ -36,4 +36,15 @@ router.put("/atualizar", async(req, res) => {
     }
 });
 
+//Remove um artista do banco de dados
+router.delete("/remover", async(req, res) => {
+    const id = req.body.id;
+    try{
+        await ArtistaServices.remover(id);
+        res.status(200).send("Artista removido");
+    } catch(erro){
+        res.status(404).send(erro);
+    }
+})
+
 module.exports = router;

@@ -32,6 +32,15 @@ class ArtistaService{
             );
         }
     }
+
+    async remover(id){
+        const artista = await Artista.findByPk(id);
+        if(!artista)
+            throw new Error("Artista não existente");
+        else{
+            await artista.destroy();
+        }
+    }
 };
 
 module.exports = new ArtistaService();
