@@ -2,7 +2,11 @@ const Usuario = require('../models/Usuario');
 
 class UsuarioService{
     async criar(body){
-        await Usuario.create(body);
+        if (body.cargo != 'admin' && body.cargo != 'user') 
+            throw new Error("Cargo inválido");
+        else {
+            await Usuario.create(body);
+        }
     }
 
     async atualizar(body){

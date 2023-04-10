@@ -8,8 +8,8 @@ router.post('/criar', async(req, res) =>{
     try{
         await UsuarioService.criar(body);
         return res.status(201).json('Usuario criado com sucesso!');
-    }catch{
-        return res.status(400);
+    }catch(error){
+        return res.status(404).send(error);
     }
 });
 
