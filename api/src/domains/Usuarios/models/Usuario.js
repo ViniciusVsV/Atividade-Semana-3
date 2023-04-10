@@ -21,7 +21,7 @@ const Usuario = sequelize.define('Usuario', {
         allowNull: false,
     },
     cargo:{
-        type: DataTypes.STRING, //adicionar "restricao" para cargo
+        type: DataTypes.ENUM('admin', 'user'),
     },
 }); 
 
