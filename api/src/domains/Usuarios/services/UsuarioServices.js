@@ -8,7 +8,7 @@ class UsuarioService{
     async atualizar(body){
         const usuario = Usuario.findByPk(body.id);
         if(!usuario)
-            throw new Error("Usuário não encontrada");
+            throw new Error("Usuário não encontrado");
         else{
             usuario = await Usuario.update(
                 {
