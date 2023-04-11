@@ -15,7 +15,7 @@ app.use("/api/usuarios", usuariosRouter);
 const artistasRouter = require("../src/domains/Artistas/controllers/index");
 app.use("/api/artistas", artistasRouter);
 
-const musicausuariorouter = require("../src/domains/musicaUsuario/controllers/index");
-app.use("/api/musicaUsuario", musicausuariorouter);
+const musicausuarioRouter = require("../src/domains/musicaUsuario/controllers/index");
+app.use("/api/musicaUsuario", musicausuarioRouter);
 
 module.exports = app;

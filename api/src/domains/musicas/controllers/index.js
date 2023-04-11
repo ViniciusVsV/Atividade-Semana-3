@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const Musica = require("../models/Musica");
 const MusicaServices = require("../services/MusicaServices");
 
 //Adiciona uma música ao banco de dados
