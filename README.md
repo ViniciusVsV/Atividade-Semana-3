@@ -1,1 +1,1 @@
-Repositório para a atividade da semana 3 do programa trainee da iJunior, 2023/01.
+Repositório para o Projeto I do programa trainee da IJunior, 2023/01.
