@@ -12,4 +12,15 @@ router.post('/criar', async(req, res) =>{
     }
 });
 
+//Lista todas as músicas que um usuário escuta
+router.get("/listarUsuario", async(req, res) => {
+    const _UsuarioId = req.body.UsuarioId;
+    const musicas = await musicaUsuarioService.listarUsuario(_UsuarioId);
+    try {
+        res.status(200).json(musicas);
+    }catch(erro){
+        res.status(404).send(erro);
+    }
+});
+
 module.exports = router;

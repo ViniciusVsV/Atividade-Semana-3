@@ -12,6 +12,18 @@ class musicaUsuarioService{
             await musicaUsuario.create(body);
         }
     }
+
+    async listarUsuario(_UsuarioId){
+        const usuario = await musicaUsuario.findAll({where: {UsuarioId: _UsuarioId}});
+        var musicas = new Array(usuario.length);
+        if(!usuario)
+            throw new Error;
+        else{
+            for(let i = 0; i < usuario.length; i++)
+                musicas[i] = await Musica.findByPk(usuario[i].MusicaId);
+            return musicas;
+        }
+    }
 };
 
 module.exports = new musicaUsuarioService();
