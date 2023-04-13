@@ -1,10 +1,12 @@
 const Artista = require("../models/Artista");
 
 class ArtistaService{
+    /** @brief Cria um artista. */
     async criar(body){
         await Artista.create(body);
     }
 
+    /** @brief Lista todas as músicas de um artista pelo nome do artista. */
     async listarArtista(_nome){
         const artista = await Artista.findOne({where: {nome : _nome}});
         if(!artista)
@@ -15,6 +17,7 @@ class ArtistaService{
         }
     }
 
+    /** @brief Atualiza um artista já existente no banco de dados.*/
     async atualizar(body){
         const artista = await Artista.findByPk(body.id); //nao está funcionando -> retorna 404 not found, mas atualiza os valores do mesmo jeito
         if(!artista)
@@ -33,6 +36,7 @@ class ArtistaService{
         }
     }
 
+    /**@brief Remove um artista já existente do banco de dados. */
     async remover(id){
         const artista = await Artista.findByPk(id);
         if(!artista)

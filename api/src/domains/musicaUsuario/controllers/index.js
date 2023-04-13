@@ -1,12 +1,12 @@
 const router = require('express').Router();
 const musicaUsuarioService = require('../services/musicaUsuarioServices');
 
-//Adiciona um usuário ao banco de dados
+//Relaciona uma música a um usuário.
 router.post('/criar', async(req, res, next) =>{
     const body = req.body;
     try{
         await musicaUsuarioService.criar(body);
-        return res.status(201).json('Agora você escuta musicas!!!');
+        return res.status(201).json('Agora você escuta musicas!');
     }catch(erro){
         next(erro);
     }
