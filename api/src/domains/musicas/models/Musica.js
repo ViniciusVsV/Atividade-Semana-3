@@ -1,6 +1,6 @@
 const sequelize = require('../../../../database/index');
 const {DataTypes} = require('sequelize');
-const Artista =  require("../../Artistas/models/Artista");
+const Artista =  require("../../artistas/models/Artista");
 
 const Musica = sequelize.define('Musica', {
   id:{
@@ -34,10 +34,10 @@ Musica.belongsTo(Artista, {
   onDelete: "CASCADE"
 });
 
-Musica.sync({alter: false, force: false})
-    .then(() => {
-        console.log('Tabela de Musicas foi (re)criada');
-    })
-    .catch((err) => console.log(err));
+// Musica.sync({alter: false, force: false})
+//     .then(() => {
+//         console.log('Tabela de Musicas foi (re)criada');
+//     })
+//     .catch((err) => console.log(err));
 
 module.exports = Musica;
