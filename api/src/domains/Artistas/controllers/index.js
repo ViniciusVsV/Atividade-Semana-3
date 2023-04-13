@@ -15,9 +15,9 @@ router.post('/criar', async(req, res, next) =>{
 
 //Lista todas as músicas de um artista pelo nome do artista
 router.get("/listarArtista", async(req, res, next) => {
-    const _nome = req.body.nome;
+    const _id = req.body.id;
     try {
-        const musicas = await ArtistaServices.listarArtista(_nome);
+        const musicas = await ArtistaServices.listarArtista(_id);
         res.status(200).json(musicas);
     }catch(erro){
         next(erro);

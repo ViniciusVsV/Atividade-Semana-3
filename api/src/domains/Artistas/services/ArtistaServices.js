@@ -1,4 +1,5 @@
 const Artista = require("../models/Artista");
+const Musica = require("../../musicas/models/Musica");
 
 class ArtistaService{
     /** @brief Cria um artista. */
@@ -6,20 +7,20 @@ class ArtistaService{
         await Artista.create(body);
     }
 
-    /** @brief Lista todas as músicas de um artista pelo nome do artista. */
-    async listarArtista(_nome){
-        const artista = await Artista.findOne({where: {nome : _nome}});
+    /** @brief Lista todas as músicas de um artista pelo id do artista. */
+    async listarArtista(_id){
+        const artista = await Artista.findByPk(_id);
         if(!artista)
             throw new Error("Artista não existe");
         else{
-            const musicas = artista.getMusicas();
+            const musicas = Musica.findAll({where: {artistaId: _id}});
             return musicas;
         }
     }
 
     /** @brief Atualiza um artista já existente no banco de dados.*/
     async atualizar(body){
-        const artista = await Artista.findByPk(body.id); //nao está funcionando -> retorna 404 not found, mas atualiza os valores do mesmo jeito
+        let artista = await Artista.findByPk(body.id); 
         if(!artista)
             throw new Error("Artista não encontrado");
         else{
