@@ -1,5 +1,5 @@
 const Musica = require("../models/Musica");
-const Artista = require("../../Artistas/models/Artista");
+const Artista = require("../../artistas/models/Artista");
 
 class MusicaServices{
     async criar(body){
