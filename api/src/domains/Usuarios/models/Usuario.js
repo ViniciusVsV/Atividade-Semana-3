@@ -21,9 +21,7 @@ const Usuario = sequelize.define('Usuario', {
         allowNull: false,
     },
     cargo:{
-        type: DataTypes.ENUM({
-            values: ['admin', 'user']
-        }),
+        type: DataTypes.ENUM('admin', 'user'),
     },
 }); 
 

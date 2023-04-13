@@ -3,34 +3,35 @@ const Usuario = require('../models/Usuario');
 const UsuarioService = require('../services/UsuarioServices');
 
 //Adiciona um usuário ao banco de dados
-router.post('/criar', async(req, res) =>{
+router.post('/criar', async(req, res, next) =>{
     const body = req.body;
     try{
         await UsuarioService.criar(body);
-        return res.status(201).json('Usuario criado com sucesso!');
+        res.status(201).json('Usuario criado com sucesso!');
     }catch(error){
-        return res.status(404).send(error);
+        next(error);
     }
 });
 
 //Atualiza as informações de um usuário no banco de dados
-router.put("/atualizar", async(req, res) => {
+router.put("/atualizar", async(req, res, next) => {
     const body = req.body;
     try {
         await UsuarioService.atualizar(body);
         res.status(200).json("Usuário atualizado");
     } catch(error) {
-        res.status(404).send(error);
+        next(error);
     }
 });
 
-router.delete("/remover", async(req, res) => {
+//Deleta um usuário do banco de dados.
+router.delete("/remover", async(req, res, next) => {
     const id = req.body.id;
     try{
         await UsuarioService.remover(id);
         res.status(200).json("Usuário excluído");
     } catch(error) {
-        res.status(400).send(error);
+        next(error);
     }
 }); 
 
