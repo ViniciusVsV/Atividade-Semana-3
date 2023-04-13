@@ -34,6 +34,17 @@ router.get("/listarTitulo", async(req, res, next) => {
     }
 });
 
+//Pegar um artista pelo id da musica
+router.get("/pegarArtista", async(req, res, next) => {
+    const id = req.body.id;
+    try {
+        const artista = await MusicaServices.pegarArtista(id);
+        res.status(200).json(artista);
+    }catch(erro){
+        next(erro);
+    }
+});
+
 //Atualiza as informações de uma música no banco de dados
 router.put("/atualizar", async(req, res, next) => {
     const body = req.body;

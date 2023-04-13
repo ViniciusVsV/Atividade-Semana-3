@@ -31,9 +31,19 @@ class MusicaServices{
         }
     }
 
+    /** @brief Retorna o artista da múscica pelo ID de uma música. */
+    async pegarArtista(id){
+        const musica = await Musica.findOne({where: {id : id}});
+        if(!musica)
+            throw new Error("Música inválida!");
+        else{
+            return Artista.findByPk(musica.artistaId);
+        }
+    }
+
     /** @brief Atualiza uma música já existente no banco de dados. */
     async atualizar(body){
-        const musica = await Musica.findByPk(body.id);
+        let musica = await Musica.findByPk(body.id);
         if(!musica)
             throw new Error("Música não encontrada");
         else{
