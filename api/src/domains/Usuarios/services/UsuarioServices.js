@@ -11,7 +11,7 @@ class UsuarioService{
     } 
     /** @brief Atualiza um usuário já existente.*/
     async atualizar(body){
-        const usuario = Usuario.findByPk(body.id);
+        let usuario = Usuario.findByPk(body.id);
         if(!usuario)
             throw new Error("Usuário não encontrado");
         else{
