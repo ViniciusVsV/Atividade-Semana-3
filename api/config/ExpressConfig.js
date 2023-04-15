@@ -18,4 +18,5 @@ app.use("/api/artistas", artistasRouter);
 const musicausuarioRouter = require("../src/domains/musicaUsuario/controllers/index");
 app.use("/api/musicaUsuario", musicausuarioRouter);
 
+
 module.exports = app;

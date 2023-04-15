@@ -1,4 +1,5 @@
 const express = require("express");
+const tratamentoErros = require("../../../middlewares/errorHandler");
 const router = express.Router();
 const MusicaServices = require("../services/MusicaServices");
 
@@ -23,14 +24,14 @@ router.get("/listarTodas", async(req, res, next) => {
     }
 });
 
-//Filtra o banco de dados pelo título passado
-router.get("/listarTitulo", async(req, res, next) => {
-    const titulo = req.body.titulo;
+//Filtra o banco de dados pelo id passado
+router.get("/listarID", async(req, res, next) => {
+    const id = req.body.id;
     try{
-        const musicas = await MusicaServices.filtrarTitulo(titulo);
+        const musicas = await MusicaServices.filtrarID(id);
         res.status(200).json(musicas);
     } catch(error) {
-        next(error);
+        return next(error);
     }
 });
 
@@ -66,5 +67,7 @@ router.delete("/remover", async(req, res, next) => {
         next(erro);
     }
 });
+
+router.use(tratamentoErros);
 
 module.exports = router;

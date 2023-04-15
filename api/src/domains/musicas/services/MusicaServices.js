@@ -4,9 +4,9 @@ const Artista = require("../../artistas/models/Artista");
 class MusicaServices{
     /** @brief Adiciona uma música ao banco de dados e relaciona ela com um artista já existente.  */
     async criar(body){
-        const artista = Artista.findByPk(body.id);
+        const artista = await Artista.findByPk(body.id);
         if(!artista){
-            throw new Error("Artista não existente");
+            throw new Error("Artista não encontrado no banco de dados");
         }else
             await Musica.create(body);
     }
@@ -15,27 +15,27 @@ class MusicaServices{
     async listarTodas(){
         const musicas = await Musica.findAll();
         if(!musicas)
-            throw new Error("Não há músicas");
+            throw new Error("Nenhuma música encontrada no banco de dados");
         else{
             return musicas;
         }
     }
 
-    /** @brief Retorna todas as músicas que tem o mesmo título informado. */
-    async filtrarTitulo(_titulo){
-        const musicas = await Musica.findAll({where: {titulo: _titulo}});
+    /** @brief Retorna a música que tem o mesmo ID informado. */
+    async filtrarID(_id){
+        const musicas = await Musica.findByPk(_id);
         if(!musicas)
-            throw new Error("Nenhuma música encontrada");
+            throw new Error("Música não encontrada no banco de dados");
         else{
             return musicas;
         }
     }
 
-    /** @brief Retorna o artista da múscica pelo ID de uma música. */
+    /** @brief Retorna o artista da música pelo ID de uma música. */
     async pegarArtista(id){
         const musica = await Musica.findOne({where: {id : id}});
         if(!musica)
-            throw new Error("Música inválida!");
+            throw new Error("Música não encontrada no banco de dados");
         else{
             return Artista.findByPk(musica.artistaId);
         }
@@ -45,7 +45,7 @@ class MusicaServices{
     async atualizar(body){
         let musica = await Musica.findByPk(body.id);
         if(!musica)
-            throw new Error("Música não encontrada");
+            throw new Error("Música não encontrada no banco de dados");
         else{
             musica = await Musica.update(
                 {
@@ -63,7 +63,7 @@ class MusicaServices{
     async remover(id){
         const musica = await Musica.findByPk(id);
         if(!musica)
-            throw new Error("Música não encontrada");
+            throw new Error("Música não encontrada no banco de dados");
         else{
             await musica.destroy();
         }
