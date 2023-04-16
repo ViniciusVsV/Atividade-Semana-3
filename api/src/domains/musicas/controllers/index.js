@@ -1,7 +1,7 @@
 const express = require("express");
-const tratamentoErros = require("../../../middlewares/errorHandler");
 const router = express.Router();
 const MusicaServices = require("../services/MusicaServices");
+const errorHandler = require("../../../middlewares/errorHandler");
 
 //Adiciona uma música ao banco de dados
 router.post('/criar', async(req, res, next) =>{
@@ -68,6 +68,6 @@ router.delete("/remover", async(req, res, next) => {
     }
 });
 
-router.use(tratamentoErros);
+router.use(errorHandler);
 
 module.exports = router;

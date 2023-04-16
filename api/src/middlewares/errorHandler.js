@@ -1,13 +1,8 @@
-function tratamentoErros(erro, req, res, next){
-    if(erro.message == "Nenhuma música encontrada no banco de dados"){
-        res.status(400).send("Não há músicas");
-    }
-    if(erro.message == "Música não encontrada no banco de dados"){
-        res.status(400).send("Música não encontrada");
-    }
-    if(erro.message == "Artista não encontrado no banco de dados"){
-        res.status(400).send("Artista não encontrado");
-    }
+function errorHandler(erro, req, res, next){
+    if(erro.name === "QueryError")
+        res.status(400).json({erro: erro.message});
+    else
+        res.status(500).json({erro: "Erro no servidor"});
 }
 
-module.exports = tratamentoErros;
+module.exports = errorHandler;

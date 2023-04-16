@@ -5,38 +5,35 @@ class UsuarioService{
     async criar(body){
         if (body.cargo != 'admin' && body.cargo != 'user') 
             throw new Error("Cargo inválido");
-        else {
-            await Usuario.create(body);
-        }
+
+        await Usuario.create(body);
     } 
     /** @brief Atualiza um usuário já existente.*/
     async atualizar(body){
         let usuario = Usuario.findByPk(body.id);
         if(!usuario)
-            throw new Error("Usuário não encontrado");
-        else{
-            usuario = await Usuario.update(
-                {
-                    nome: body.nome,
-                    email: body.email,
-                    senha: body.senha,
-                    cargo: body.cargo
-                },
-                {
-                    where: {id: body.id}
-                }
-            );
-        }
+            throw new QueryError("Usuário não encontrado");
+
+        usuario = await Usuario.update(
+            {
+                nome: body.nome,
+                email: body.email,
+                senha: body.senha,
+                cargo: body.cargo
+            },
+            {
+                where: {id: body.id}
+            }
+        );
     }
 
     /** @brief Remove um usuário.*/
     async remover(id){
         const usuario = await Usuario.findByPk(id);
         if(!usuario)
-            throw new Error("Usuário não encontrado");
-        else{
-            await usuario.destroy();
-        }
+            throw new QueryError("Usuário não encontrado");
+
+        await usuario.destroy();
     }
 };
 
