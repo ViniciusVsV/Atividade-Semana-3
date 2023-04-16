@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const MusicaServices = require("../services/MusicaServices");
 const errorHandler = require("../../../middlewares/errorHandler");
+const cargoUsuario = require("../../usuarios/models/constants/cargoUsuario");
 
 //Adiciona uma música ao banco de dados
 router.post('/criar', async(req, res, next) =>{
@@ -47,7 +48,9 @@ router.get("/pegarArtista", async(req, res, next) => {
 });
 
 //Atualiza as informações de uma música no banco de dados
-router.put("/atualizar", async(req, res, next) => {
+router.put("/atualizar", 
+    checkRole(cargoUsuario.ADMIN), 
+    async(req, res, next) => {
     const body = req.body;
     try {
         await MusicaServices.atualizar(body);
@@ -58,7 +61,9 @@ router.put("/atualizar", async(req, res, next) => {
 });
 
 //Remove uma música do banco de dados pelo id
-router.delete("/remover", async(req, res, next) => {
+router.delete("/remover", 
+    checkRole(cargoUsuario.ADMIN), 
+    async(req, res, next) => {
     const id = req.body.id;
     try{
         await MusicaServices.remover(id);
