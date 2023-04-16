@@ -1,6 +1,7 @@
 const musicaUsuario = require('../models/musicaUsuario');
 const Musica = require('../../musicas/models/Musica');
 const Usuario = require("../../usuarios/models/Usuario");
+const QueryError = require("../../../../errors/QueryError");
 
 class musicaUsuarioService{
     /** @brief Relaciona uma música existente a um usuário existente no banco de dados. */
@@ -16,7 +17,7 @@ class musicaUsuarioService{
     async listarUsuario(_UsuarioId){
         const usuario = await musicaUsuario.findAll({where: {UsuarioId: _UsuarioId}});
         var musicas = new Array(usuario.length);
-        if(!usuario)
+        if(usuario.length == 0)
             throw new QueryError("Artista não existe");
 
         for(let i = 0; i < usuario.length; i++)

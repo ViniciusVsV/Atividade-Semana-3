@@ -17,7 +17,7 @@ class MusicaServices{
     /** @brief Lista todas as músicas do banco de dados.*/
     async listarTodas(){
         const musicas = await Musica.findAll();
-        if(!musicas)
+        if(musicas.length == 0)
             throw new QueryError("Nenhuma música encontrada no banco de dados");
         else{
             return musicas;

@@ -2,13 +2,17 @@ const express = require("express");
 const router = express.Router();
 const MusicaServices = require("../services/MusicaServices");
 const errorHandler = require("../../../middlewares/errorHandler");
+const Musica = require("../models/Musica");
 const cargoUsuario = require("../../usuarios/models/constants/cargoUsuario");
+const checkRole = require("../../../middlewares/checkRole");
+const checkParams = require("../../../middlewares/checkParams");
 
 //Adiciona uma música ao banco de dados
-router.post('/criar', async(req, res, next) =>{
-    const body = req.body;
+router.post('/criar', 
+    checkParams(Musica),
+    async(req, res, next) =>{
     try{
-        await MusicaServices.criar(body);
+        await MusicaServices.criar(req.body);
         res.status(201).json('Música criada com sucesso!');
     }catch(erro){
         next(erro);
@@ -73,6 +77,7 @@ router.delete("/remover",
     }
 });
 
+router.use(checkParams(Musica));
 router.use(errorHandler);
 
 module.exports = router;

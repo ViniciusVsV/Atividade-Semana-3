@@ -7,8 +7,8 @@ const checkRole = (cargos) => {
             if(!cargos.include(cargo)){
                 throw new PermissionError("Acesso não autorizado");
             } next();
-        } catch(error){
-            next(error);
+        } catch(erro){
+            next(erro);
         }
     }
 }

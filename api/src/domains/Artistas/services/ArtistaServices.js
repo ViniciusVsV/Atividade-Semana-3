@@ -1,5 +1,6 @@
 const Artista = require("../models/Artista");
 const Musica = require("../../musicas/models/Musica");
+const QueryError = require("../../../../errors/QueryError");
 
 class ArtistaService{
     /** @brief Cria um artista. */

@@ -1,9 +1,13 @@
 const router = require('express').Router();
 const Usuario = require('../models/Usuario');
 const UsuarioService = require('../services/UsuarioServices');
+const errorHandler = require("../../../middlewares/errorHandler");
+const checkParams = require("../../../middlewares/checkParams");
 
 //Adiciona um usuário ao banco de dados
-router.post('/criar', async(req, res, next) =>{
+router.post('/criar', 
+    checkParams("Usuario"), 
+    async(req, res, next) =>{
     const body = req.body;
     try{
         await UsuarioService.criar(body);
@@ -34,5 +38,7 @@ router.delete("/remover", async(req, res, next) => {
         next(error);
     }
 }); 
+
+router.use(errorHandler);
 
 module.exports = router;

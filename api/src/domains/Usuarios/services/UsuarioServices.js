@@ -1,4 +1,5 @@
 const Usuario = require('../models/Usuario');
+const QueryError = require("../../../../errors/QueryError");
 
 class UsuarioService{
     /** @brief Cria um usuário em que o cargo só pode ser admin ou user.*/

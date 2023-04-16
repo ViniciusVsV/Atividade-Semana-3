@@ -1,8 +1,13 @@
 const router = require('express').Router();
 const musicaUsuarioService = require('../services/musicaUsuarioServices');
+const musicaUsuario = require("../models/musicaUsuario");
+const checkParams = require("../../../middlewares/checkParams");
+const errorHandler = require("../../../middlewares/errorHandler");
 
 //Relaciona uma música a um usuário.
-router.post('/criar', async(req, res, next) =>{
+router.post('/criar', 
+    checkParams("musicaUsuario"), 
+    async(req, res, next) =>{
     const body = req.body;
     try{
         await musicaUsuarioService.criar(body);
@@ -22,5 +27,7 @@ router.get("/listarUsuario", async(req, res, next) => {
         next(erro);
     }
 });
+
+router.use(errorHandler);
 
 module.exports = router;
