@@ -9,7 +9,7 @@ const checkParams = require("../../../middlewares/checkParams");
 
 //Adiciona uma música ao banco de dados
 router.post('/criar', 
-    checkParams(Musica),
+    checkParams("Musica"),
     async(req, res, next) =>{
     try{
         await MusicaServices.criar(req.body);
@@ -77,7 +77,6 @@ router.delete("/remover",
     }
 });
 
-router.use(checkParams(Musica));
 router.use(errorHandler);
 
 module.exports = router;
