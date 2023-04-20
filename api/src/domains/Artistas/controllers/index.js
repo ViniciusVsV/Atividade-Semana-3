@@ -33,7 +33,8 @@ router.get("/listarArtista",
 
 //Atualiza as informações de um artista no banco de dados
 router.put("/atualizar", 
-    checkRole(cargoUsuario.ADMIN), 
+    checkRole(cargoUsuario.ADMIN),
+    checkParams("Artista"), 
     async(req, res, next) => {
     const body = req.body;
     try{

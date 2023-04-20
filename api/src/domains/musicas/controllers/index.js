@@ -53,7 +53,8 @@ router.get("/pegarArtista", async(req, res, next) => {
 
 //Atualiza as informações de uma música no banco de dados
 router.put("/atualizar", 
-    checkRole(cargoUsuario.ADMIN), 
+    checkRole(cargoUsuario.ADMIN),
+    checkParams("Musica"), 
     async(req, res, next) => {
     const body = req.body;
     try {

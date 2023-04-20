@@ -4,8 +4,12 @@ const QueryError = require("../../../../errors/QueryError");
 class UsuarioService{
     /** @brief Cria um usuário em que o cargo só pode ser admin ou user.*/
     async criar(body){
+        const usuario = await Usuario.findOne({where: {email: body.email}});
+        if(usuario)
+            throw new QueryError("E-mail já cadastrado");
         if (body.cargo != 'admin' && body.cargo != 'user') 
-            throw new Error("Cargo inválido");
+            throw new QueryError("Cargo inválido");
+        
 
         await Usuario.create(body);
     } 

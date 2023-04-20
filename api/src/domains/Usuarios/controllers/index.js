@@ -18,7 +18,9 @@ router.post('/criar',
 });
 
 //Atualiza as informações de um usuário no banco de dados
-router.put("/atualizar", async(req, res, next) => {
+router.put("/atualizar",
+    checkParams("Usuario"),
+    async(req, res, next) => {
     const body = req.body;
     try {
         await UsuarioService.atualizar(body);

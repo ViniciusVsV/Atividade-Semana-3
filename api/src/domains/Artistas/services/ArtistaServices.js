@@ -1,10 +1,14 @@
 const Artista = require("../models/Artista");
-const Musica = require("../../musicas/models/Musica");
+const Musica = require("../../Musicas/models/Musica");
 const QueryError = require("../../../../errors/QueryError");
 
 class ArtistaService{
     /** @brief Cria um artista. */
     async criar(body){
+        const artista = await Artista.findOne({where: {nome: body.nome}});
+        if(artista)
+            throw new QueryError("Nome já utilizado");
+
         await Artista.create(body);
     }
 

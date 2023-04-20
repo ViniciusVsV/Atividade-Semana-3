@@ -17,7 +17,7 @@ class musicaUsuarioService{
     async listarUsuario(_UsuarioId){
         const usuario = await musicaUsuario.findAll({where: {UsuarioId: _UsuarioId}});
         var musicas = new Array(usuario.length);
-        if(usuario.length == 0)
+        if(musicas.length === 0)
             throw new QueryError("Artista não existe");
 
         for(let i = 0; i < usuario.length; i++)
