@@ -3,7 +3,7 @@ const router = express.Router();
 const MusicaServices = require("../services/MusicaServices");
 const errorHandler = require("../../../middlewares/errorHandler");
 const Musica = require("../models/Musica");
-const cargoUsuario = require("../../usuarios/models/constants/cargoUsuario");
+const cargoUsuario = require("../../../../constants/cargoUsuario");
 const checkRole = require("../../../middlewares/checkRole");
 const checkParams = require("../../../middlewares/checkParams");
 
