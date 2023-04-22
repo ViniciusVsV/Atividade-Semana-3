@@ -1,13 +1,13 @@
 const UsuarioService = require('../services/UsuarioServices');
 const router = require('express').Router();
-const {logginMiddleware,
+const {loginMiddleware,
     verifyJWT,
     checkRole,
     notLoggedIn} = require('../../../middlewares/authMiddlewares');
 const errorHandler = require("../../../middlewares/errorHandler");
 const checkParams = require("../../../middlewares/checkParams");
 
-router.post('/login', notLoggedIn, logginMiddleware);
+router.post('/login', notLoggedIn, loginMiddleware);
 
 //Realiza o logout limpando o cookie
 router.post('/logout',
@@ -20,7 +20,6 @@ router.post('/logout',
             next(error)
         }
     });
-
 
 //Adiciona um usuário ao banco de dados
 router.post('/criar', 

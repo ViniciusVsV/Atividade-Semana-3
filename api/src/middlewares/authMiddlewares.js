@@ -24,7 +24,7 @@ function generateJWT(usuario, res){
         cargo: usuario.cargo,
     };
 
-    const token = jwt.sign({ usuario: body}, process.env.SECRET_KEY, { expiressIn: process.env.JWT_EXPIRATION});
+    const token = jwt.sign({ usuario: body}, process.env.SECRET_KEY, { expiresIn: process.env.JWT_EXPIRATION});
 
     res.cookie('jwt', token, {
         httpOnly: true,
@@ -32,7 +32,7 @@ function generateJWT(usuario, res){
     });
 };
 
-async function logginMiddleware(req, res, next){
+async function loginMiddleware(req, res, next){
     try{
         const usuario = await Usuario.findOne({where: {email: req.body.email}});
 
@@ -48,11 +48,10 @@ async function logginMiddleware(req, res, next){
 
         generateJWT(usuario, res);
 
-        res.status(204).end();
+        res.status(200).end();
     } catch(error){
         next(error);
     }
-    
 }; 
 
 function cookieExtractor(req){
@@ -80,9 +79,19 @@ function verifyJWT(req, res, next){
     }
 };
 
-function notLoggedIn(){};
+async function notLoggedIn(req, res, next){ 
+    try{ 
+        const token = cookieExtractor(req); 
+        if(token){ 
+            throw new Error('Você já está logado!'); 
+        } 
+        next(); 
+    } 
+    catch(error){ 
+        next(error); 
+    }};
 
-module.exports = {logginMiddleware,
+module.exports = {loginMiddleware,
     verifyJWT,
     checkRole,
     notLoggedIn};
