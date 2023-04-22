@@ -1,7 +1,10 @@
 const router = require('express').Router();
 const ArtistaServices = require('../services/ArtistaServices');
 const errorHandler = require("../../../middlewares/errorHandler");
-const checkRole = require('../../../middlewares/checkRole');
+const {logginMiddleware,
+    verifyJWT,
+    checkRole,
+    notLoggedIn} = require('../../../middlewares/authMiddlewares');
 const cargoUsuario = require('../../../../constants/cargoUsuario');
 const Artista = require("../models/Artista");
 const checkParams = require('../../../middlewares/checkParams');

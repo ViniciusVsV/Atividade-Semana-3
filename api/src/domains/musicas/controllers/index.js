@@ -4,7 +4,10 @@ const MusicaServices = require("../services/MusicaServices");
 const errorHandler = require("../../../middlewares/errorHandler");
 const Musica = require("../models/Musica");
 const cargoUsuario = require("../../../../constants/cargoUsuario");
-const checkRole = require("../../../middlewares/checkRole");
+const {logginMiddleware,
+    verifyJWT,
+    checkRole,
+    notLoggedIn} = require('../../../middlewares/authMiddlewares');
 const checkParams = require("../../../middlewares/checkParams");
 
 //Adiciona uma música ao banco de dados
