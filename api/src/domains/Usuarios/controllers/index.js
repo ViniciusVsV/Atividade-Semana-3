@@ -1,8 +1,16 @@
-const router = require('express').Router();
-const Usuario = require('../models/Usuario');
 const UsuarioService = require('../services/UsuarioServices');
+const router = require('express').Router();
+const {logginMiddleware,
+    verifyJWT,
+    checkRole,
+    notLoggedIn} = require('../../../middlewares/authMiddlewares');
 const errorHandler = require("../../../middlewares/errorHandler");
 const checkParams = require("../../../middlewares/checkParams");
+
+router.post('/login', notLoggedIn, logginMiddleware);
+
+router.post('/logout', );
+
 
 //Adiciona um usuário ao banco de dados
 router.post('/criar', 
@@ -18,12 +26,13 @@ router.post('/criar',
 });
 
 //Atualiza as informações de um usuário no banco de dados
-router.put("/atualizar",
+router.put("/atualizar/:id",
+    verifyJWT,
     checkParams("Usuario"),
     async(req, res, next) => {
     const body = req.body;
     try {
-        await UsuarioService.atualizar(body);
+        await UsuarioService.atualizar(req.params.id, body, req.usuario);
         res.status(200).json("Usuário atualizado");
     } catch(error) {
         next(error);
