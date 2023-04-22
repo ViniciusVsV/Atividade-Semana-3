@@ -9,7 +9,17 @@ const checkParams = require("../../../middlewares/checkParams");
 
 router.post('/login', notLoggedIn, logginMiddleware);
 
-router.post('/logout', );
+//Realiza o logout limpando o cookie
+router.post('/logout',
+    verifyJWT,
+    async (req, res, next) => {
+        try {
+            res.clearCookie('jwt');
+            res.status(200).json('Logout realizado com sucesso');
+        } catch (error) {
+            next(error)
+        }
+    });
 
 
 //Adiciona um usuário ao banco de dados
