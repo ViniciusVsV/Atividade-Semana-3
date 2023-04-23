@@ -49,7 +49,9 @@ router.put("/atualizar/:id",
 });
 
 //Deleta um usuário do banco de dados.
-router.delete("/remover", async(req, res, next) => {
+router.delete("/remover", 
+    verifyJWT,
+    async(req, res, next) => {
     const id = req.body.id;
     try{
         await UsuarioService.remover(id);

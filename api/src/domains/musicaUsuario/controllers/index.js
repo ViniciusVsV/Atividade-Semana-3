@@ -3,9 +3,11 @@ const musicaUsuarioService = require('../services/musicaUsuarioServices');
 const musicaUsuario = require("../models/musicaUsuario");
 const checkParams = require("../../../middlewares/checkParams");
 const errorHandler = require("../../../middlewares/errorHandler");
+const { verifyJWT } = require('../../../middlewares/authMiddlewares');
 
 //Relaciona uma música a um usuário.
-router.post('/criar', 
+router.post('/criar',
+    verifyJWT,
     checkParams("musicaUsuario"), 
     async(req, res, next) =>{
     const body = req.body;
@@ -18,7 +20,9 @@ router.post('/criar',
 });
 
 //Lista todas as músicas que um usuário escuta
-router.get("/listarUsuario", async(req, res, next) => {
+router.get("/listarUsuario",
+    verifyJWT,
+    async(req, res, next) => {
     const _UsuarioId = req.body.UsuarioId;
     const musicas = await musicaUsuarioService.listarUsuario(_UsuarioId);
     try {
