@@ -1,13 +1,18 @@
 const router = require('express').Router();
 const ArtistaServices = require('../services/ArtistaServices');
 const errorHandler = require("../../../middlewares/errorHandler");
-const checkRole = require('../../../middlewares/checkRole');
+const {logginMiddleware,
+    verifyJWT,
+    checkRole,
+    notLoggedIn} = require('../../../middlewares/authMiddlewares');
 const cargoUsuario = require('../../../../constants/cargoUsuario');
 const Artista = require("../models/Artista");
 const checkParams = require('../../../middlewares/checkParams');
 
 //Adiciona um artista ao banco de dados
-router.post('/criar', 
+router.post('/criar',
+    verifyJWT,
+    checkRole(cargoUsuario.ADMIN),
     checkParams("Artista"), 
     async(req, res, next) =>{
     const body = req.body;
@@ -21,6 +26,7 @@ router.post('/criar',
 
 //Lista todas as músicas de um artista pelo id do artista
 router.get("/listarArtista",
+    verifyJWT,
     async(req, res, next) => {
     const _id = req.body.id;
     try {
@@ -33,6 +39,7 @@ router.get("/listarArtista",
 
 //Atualiza as informações de um artista no banco de dados
 router.put("/atualizar", 
+    verifyJWT,
     checkRole(cargoUsuario.ADMIN),
     checkParams("Artista"), 
     async(req, res, next) => {
@@ -47,6 +54,7 @@ router.put("/atualizar",
 
 //Remove um artista e todas as músicas dele do banco de dados
 router.delete("/remover", 
+    verifyJWT,
     checkRole(cargoUsuario.ADMIN), 
     async(req, res, next) => {
     const id = req.body.id;

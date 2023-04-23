@@ -1,8 +1,25 @@
-const router = require('express').Router();
-const Usuario = require('../models/Usuario');
 const UsuarioService = require('../services/UsuarioServices');
+const router = require('express').Router();
+const {loginMiddleware,
+    verifyJWT,
+    checkRole,
+    notLoggedIn} = require('../../../middlewares/authMiddlewares');
 const errorHandler = require("../../../middlewares/errorHandler");
 const checkParams = require("../../../middlewares/checkParams");
+
+router.post('/login', notLoggedIn, loginMiddleware);
+
+//Realiza o logout limpando o cookie
+router.post('/logout',
+    verifyJWT,
+    async (req, res, next) => {
+        try {
+            res.clearCookie('jwt');
+            res.status(200).json('Logout realizado com sucesso');
+        } catch (error) {
+            next(error)
+        }
+    });
 
 //Adiciona um usuário ao banco de dados
 router.post('/criar', 
@@ -18,12 +35,13 @@ router.post('/criar',
 });
 
 //Atualiza as informações de um usuário no banco de dados
-router.put("/atualizar",
+router.put("/atualizar/:id",
+    verifyJWT,
     checkParams("Usuario"),
     async(req, res, next) => {
     const body = req.body;
     try {
-        await UsuarioService.atualizar(body);
+        await UsuarioService.atualizar(req.params.id, body, req.usuario);
         res.status(200).json("Usuário atualizado");
     } catch(error) {
         next(error);
@@ -31,7 +49,9 @@ router.put("/atualizar",
 });
 
 //Deleta um usuário do banco de dados.
-router.delete("/remover", async(req, res, next) => {
+router.delete("/remover", 
+    verifyJWT,
+    async(req, res, next) => {
     const id = req.body.id;
     try{
         await UsuarioService.remover(id);

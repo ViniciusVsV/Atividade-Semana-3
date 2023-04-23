@@ -1,16 +1,22 @@
+require('dotenv').config();
+
 const express = require("express");
-const cors = require("cors");
 const app = express();
 
+const cors = require("cors");
 app.use(cors({
     origin: process.env.CLIENT_URL,
     credentials: true
 }));
 
-app.use(express.json());
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 app.use(express.urlencoded({
     extended:true
 }));
+
+app.use(express.json());
 
 const musicaRouter = require("../src/domains/Musicas/controllers/index");
 app.use("/api/musicas", musicaRouter);
