@@ -10,7 +10,7 @@ jest.mock('../models/musicaUsuario', () => ({
 
 jest.mock('../../usuarios/models/Usuario', () => ({
   findByPk: jest.fn(),
-  findAll: jest.fn(),
+  findAll: jest.fn(), 
 }));
 
 jest.mock('../../musicas/models/Musica', () => ({
@@ -39,3 +39,4 @@ describe('create', () => {
     expect(musicaUsuario.create).toHaveBeenCalledWith(mockBody);
   });
 });
+
