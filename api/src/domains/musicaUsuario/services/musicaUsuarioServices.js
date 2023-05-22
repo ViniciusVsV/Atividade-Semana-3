@@ -1,6 +1,6 @@
 const musicaUsuario = require('../models/musicaUsuario');
-const Musica = require('../../musicas/models/Musica');
-const Usuario = require("../../usuarios/models/Usuario");
+const Musica = require('../../Musicas/models/Musica');
+const Usuario = require("../../Usuarios/models/Usuario");
 const QueryError = require("../../../../errors/QueryError");
 
 class musicaUsuarioService{
