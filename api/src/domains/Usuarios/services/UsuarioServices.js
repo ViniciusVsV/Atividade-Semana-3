@@ -43,7 +43,7 @@ class UsuarioService{
     }
     /** @brief Atualiza um usuário já existente.*/
     async atualizar(id, body, usuarioLogado){
-        const usuario = await this.getById(id);
+        const usuario = await Usuario.getById(id);
 
         if(usuarioLogado.cargo != cargoUsuario.ADMIN && usuarioLogado.id != id){
             throw new PermissionError("Você não tem permisão para editar outro usuário!");

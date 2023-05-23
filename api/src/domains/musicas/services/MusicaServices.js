@@ -1,5 +1,5 @@
 const Musica = require("../models/Musica");
-const Artista = require("../../artistas/models/Artista");
+const Artista = require("../../Artistas/models/Artista");
 const QueryError = require("../../../../errors/QueryError");
 
 
@@ -52,7 +52,8 @@ class MusicaServices{
             musica = await Musica.update(
                 {
                     foto: body.foto,
-                    titulo: body.titulo
+                    titulo: body.titulo,
+                    categoria: body.categoria
                 },
                 {
                     where: {id: body.id}
