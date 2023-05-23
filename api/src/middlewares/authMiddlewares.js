@@ -1,13 +1,13 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const Usuario = require('../domains/usuarios/models/Usuario');
+const Usuario = require('../domains/Usuarios/models/Usuario');
 const PermissionError = require("../../errors/PermissionError");
 
 const checkRole = (cargos) => { 
     return async (req, res, next) => {
         try {
-            const cargo = await req.usuario.cargo;
-            if(!cargos.include(cargo)){
+            const cargo =  req.usuario.cargo;
+            if(cargo != "admin"){
                 throw new PermissionError("Acesso não autorizado");
             } next();
         } catch(erro){
@@ -34,6 +34,7 @@ function generateJWT(usuario, res){
 
 async function loginMiddleware(req, res, next){
     try{
+
         const usuario = await Usuario.findOne({where: {email: req.body.email}});
 
         if(!usuario){
@@ -89,7 +90,7 @@ async function notLoggedIn(req, res, next){
     } 
     catch(error){ 
         next(error); 
-    }};
+}};
 
 module.exports = {loginMiddleware,
     verifyJWT,

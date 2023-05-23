@@ -16,9 +16,7 @@ class UsuarioService{
 
     /** @brief Cria um usuário em que o cargo só pode ser user.*/
     async criar(body){
-        if(body.cargo == cargoUsuario.ADMIN){
-            throw new PermissionError('Não é possível criar um usuário com o cargo de administrador');
-        };
+        
 
         const usuario = await Usuario.findOne({where: {email: body.email}});
 
@@ -26,7 +24,7 @@ class UsuarioService{
             throw new QueryError("E-mail já cadastrado");
         };
             
-        if (body.cargo != 'user'){
+        if (body.cargo != 'user' && body.cargo != "admin"){
             throw new QueryError("Cargo inválido");
         } else{
             const usuario = {
