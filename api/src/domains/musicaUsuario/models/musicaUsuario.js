@@ -15,10 +15,10 @@ const musicaUsuario = sequelize.define('musicaUsuario', {
 Usuario.belongsToMany(Musica, {through: musicaUsuario});
 Musica.belongsToMany(Usuario, {through: musicaUsuario});
 
-// musicaUsuario.sync({alter: false, force: false})
-//     .then(() => {
-//         console.log('Tabela musicaUsuario foi (re)criada');
-//     })
-//     .catch((err) => console.log(err));
-
+ /*musicaUsuario.sync({alter: false, force: false})
+     .then(() => {
+         console.log('Tabela musicaUsuario foi (re)criada');
+     })
+     .catch((err) => console.log(err));
+*/
 module.exports = musicaUsuario;

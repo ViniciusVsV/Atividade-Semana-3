@@ -22,10 +22,10 @@ const Artista = sequelize.define("Artista", {
     }
 });
 
-// Artista.sync({alter: false, force: false})
-//     .then(() => {
-//         console.log("Tabela de Artistas foi (re)criada");
-//     })
-//     .catch((erro) => console.log(erro));
-    
+/* Artista.sync({alter: false, force: false})
+     .then(() => {
+         console.log("Tabela de Artistas foi (re)criada");
+     })
+     .catch((erro) => console.log(erro));
+    */
 module.exports = Artista;
